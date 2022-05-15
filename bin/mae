@@ -7,32 +7,29 @@ require "mae"
 
 ROOT_DIR = File.expand_path("../..", __FILE__)
 
-listener = Listen.to(ROOT_DIR + "/slim", ROOT_DIR + "/sass", force_polling: true) do |modified, added, removed|
-  puts(modified: modified, added: added, removed: removed)
+case ARGV[0]
+when 's', 'server' then
+  listener = Listen.to(ROOT_DIR + "/slim", ROOT_DIR + "/sass", force_polling: true) do |modified, added, removed|
+    puts(modified: modified, added: added, removed: removed)
 
-  modified.each do |f|
-    extname = File.extname(f)
-    if extname == '.slim'
-      Mae.slim2html(f)
-    elsif extname == '.sass' || extname == '.scss'
-      Mae.sass2css(f)
+    converting = Proc.new do |f|
+      extname = File.extname(f)
+      if extname == '.slim'
+        Mae.slim2html(f)
+      elsif extname == '.sass' || extname == '.scss'
+        Mae.sass2css(f)
+      end
     end
-  end
 
-  added.each do |f|
-    extname = File.extname(f)
-    if extname == '.slim'
-      Mae.slim2html(f)
-    elsif extname == '.sass' || extname == '.scss'
-      Mae.sass2css(f)
-    end
+    modified.each &converting
+    added.each &converting
   end
+  listener.start
+
+  srv = WEBrick::HTTPServer.new({
+    DocumentRoot:   './output',
+    BindAddress:    '127.0.0.1',
+    Port:           5000,
+  })
+  srv.start
 end
-listener.start
-
-srv = WEBrick::HTTPServer.new({
-  DocumentRoot:   './output',
-  BindAddress:    '127.0.0.1',
-  Port:           5000,
-})
-srv.start
