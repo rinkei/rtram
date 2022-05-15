@@ -3,29 +3,9 @@
 require "bundler/setup"
 require "webrick"
 require "listen"
-require "sass-embedded"
-require "slim"
-require "slim/include"
+require "mae"
 
 ROOT_DIR = File.expand_path("../..", __FILE__)
-
-def slim2html(f)
-  basename = File.basename(f, ".*")
-  html_name = basename + '.html'
-  html = Slim::Template.new(f, { pretty: true }).render
-  File.open("#{ROOT_DIR}/output/#{html_name}", 'w') do |f|
-    f.write(html)
-  end
-end
-
-def sass2css(f)
-  basename = File.basename(f, ".*")
-  css_name = basename + '.css'
-  sass = Sass.compile(f)
-  File.open("#{ROOT_DIR}/output/css/#{css_name}", 'w') do |f|
-    f.write(sass.css)
-  end
-end
 
 listener = Listen.to(ROOT_DIR + "/slim", ROOT_DIR + "/sass", force_polling: true) do |modified, added, removed|
   puts(modified: modified, added: added, removed: removed)
@@ -33,18 +13,18 @@ listener = Listen.to(ROOT_DIR + "/slim", ROOT_DIR + "/sass", force_polling: true
   modified.each do |f|
     extname = File.extname(f)
     if extname == '.slim'
-      slim2html(f)
+      Mae.slim2html(f)
     elsif extname == '.sass' || extname == '.scss'
-      sass2css(f)
+      Mae.sass2css(f)
     end
   end
 
   added.each do |f|
     extname = File.extname(f)
     if extname == '.slim'
-      slim2html(f)
+      Mae.slim2html(f)
     elsif extname == '.sass' || extname == '.scss'
-      sass2css(f)
+      Mae.sass2css(f)
     end
   end
 end
