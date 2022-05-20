@@ -2,11 +2,11 @@
 
 require "webrick"
 require "listen"
+require "mae"
+require "mae/converter"
 
 module Mae
   module Server
-    ROOT_DIR = File.expand_path("../../..", __FILE__)
-
     def start
       listen_to_convert
 
@@ -22,13 +22,13 @@ module Mae
       converting = Proc.new do |f|
         extname = File.extname(f)
         if extname == '.slim'
-          Mae.slim2html(f)
+          Mae::Converter.slim2html(f)
         elsif extname == '.sass' || extname == '.scss'
-          Mae.sass2css(f)
+          Mae::Converter.sass2css(f)
         end
       end
 
-      listener = Listen.to(ROOT_DIR + "/slim", ROOT_DIR + "/sass", force_polling: true) do |modified, added, removed|
+      listener = Listen.to(Mae::ROOT_DIR + "/slim", Mae::ROOT_DIR + "/sass", force_polling: true) do |modified, added, removed|
         modified.each &converting
         added.each &converting
       end
