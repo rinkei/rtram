@@ -1,35 +1,9 @@
 #!/usr/bin/env ruby
 
 require "bundler/setup"
-require "webrick"
-require "listen"
-require "mae"
-
-ROOT_DIR = File.expand_path("../..", __FILE__)
+require "mae/server"
 
 case ARGV[0]
 when 's', 'server' then
-  listener = Listen.to(ROOT_DIR + "/slim", ROOT_DIR + "/sass", force_polling: true) do |modified, added, removed|
-    puts(modified: modified, added: added, removed: removed)
-
-    converting = Proc.new do |f|
-      extname = File.extname(f)
-      if extname == '.slim'
-        Mae.slim2html(f)
-      elsif extname == '.sass' || extname == '.scss'
-        Mae.sass2css(f)
-      end
-    end
-
-    modified.each &converting
-    added.each &converting
-  end
-  listener.start
-
-  srv = WEBrick::HTTPServer.new({
-    DocumentRoot:   './output',
-    BindAddress:    '127.0.0.1',
-    Port:           5000,
-  })
-  srv.start
+  Mae::Server.start
 end
