@@ -7,28 +7,30 @@ require "mae/converter"
 
 module Mae
   module Server
-    def start
-      listen_to_convert
+    def start(working_directory)
+      listen_to_convert(working_directory)
 
       srv = WEBrick::HTTPServer.new({
-        DocumentRoot:   './output',
+        DocumentRoot:   "#{working_directory}/output",
         BindAddress:    '127.0.0.1',
         Port:           5000,
       })
       srv.start
     end
 
-    def listen_to_convert
+    def listen_to_convert(working_directory)
       converting = Proc.new do |f|
         extname = File.extname(f)
         if extname == '.slim'
-          Mae::Converter.slim2html(f)
+          Mae::Converter.slim2html(f, working_directory)
         elsif extname == '.sass' || extname == '.scss'
-          Mae::Converter.sass2css(f)
+          Mae::Converter.sass2css(f, working_directory)
         end
       end
 
-      listener = Listen.to(Mae::ROOT_DIR + "/slim", Mae::ROOT_DIR + "/sass", force_polling: true) do |modified, added, removed|
+      directories = ["#{working_directory}/slim", "#{working_directory}/sass"]
+
+      listener = Listen.to(*directories, force_polling: true) do |modified, added, removed|
         modified.each &converting
         added.each &converting
       end

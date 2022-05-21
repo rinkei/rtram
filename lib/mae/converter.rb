@@ -7,20 +7,20 @@ require "mae"
 
 module Mae
   module Converter
-    def slim2html(f)
+    def slim2html(f, working_directory)
       basename = File.basename(f, ".*")
       html_name = basename + '.html'
       html = Slim::Template.new(f, { pretty: true }).render
-      File.open("#{Mae::ROOT_DIR}/output/#{html_name}", 'w') do |f|
+      File.open("#{working_directory}/output/#{html_name}", 'w') do |f|
         f.write(html)
       end
     end
 
-    def sass2css(f)
+    def sass2css(f, working_directory)
       basename = File.basename(f, ".*")
       css_name = basename + '.css'
       sass = Sass.compile(f)
-      File.open("#{Mae::ROOT_DIR}/output/css/#{css_name}", 'w') do |f|
+      File.open("#{working_directory}/output/css/#{css_name}", 'w') do |f|
         f.write(sass.css)
       end
     end

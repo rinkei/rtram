@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'mae/server'
+
+case ARGV[0]
+when 's', 'server' then
+  Mae::Server.start ARGV[1]
+end
