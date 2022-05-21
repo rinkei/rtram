@@ -7,12 +7,18 @@ module Mae
     class Error < StandardError; end
 
     def create(project_name)
-      Dir.mkdir(project_name)
-      Dir.mkdir("#{project_name}/slim")
-      Dir.mkdir("#{project_name}/sass")
-      Dir.mkdir("#{project_name}/output")
-      Dir.mkdir("#{project_name}/output/css")
-      Dir.mkdir("#{project_name}/output/image")
+      if project_name
+        working_directory = project_name
+        Dir.mkdir(working_directory) unless Dir.exist?(working_directory)
+      else
+        working_directory = './'
+      end
+
+      Dir.mkdir("#{working_directory}/slim") unless Dir.exist?("#{working_directory}/slim")
+      Dir.mkdir("#{working_directory}/sass") unless Dir.exist?("#{working_directory}/sass")
+      Dir.mkdir("#{working_directory}/output") unless Dir.exist?("#{working_directory}/output")
+      Dir.mkdir("#{working_directory}/output/css") unless Dir.exist?("#{working_directory}/output/css")
+      Dir.mkdir("#{working_directory}/output/image") unless Dir.exist?("#{working_directory}/output/image")
     end
 
     def valid?(project_name)
