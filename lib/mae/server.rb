@@ -12,6 +12,9 @@ module Mae
 
       Mae::Project.valid?(working_directory)
 
+      existing_entries = Dir.glob("#{working_directory}/{slim,sass}/**/*.{slim,sass,scss}")
+      existing_entries.each { |f| Mae::Converter.convert(f, working_directory) }
+
       listen_to_convert(working_directory)
 
       srv = WEBrick::HTTPServer.new({
@@ -23,20 +26,11 @@ module Mae
     end
 
     def listen_to_convert(working_directory)
-      converting = Proc.new do |f|
-        extname = File.extname(f)
-        if extname == '.slim'
-          Mae::Converter.slim2html(f, working_directory)
-        elsif extname == '.sass' || extname == '.scss'
-          Mae::Converter.sass2css(f, working_directory)
-        end
-      end
-
       directories = ["#{working_directory}/slim", "#{working_directory}/sass"]
 
       listener = Listen.to(*directories, force_polling: true) do |modified, added, removed|
-        modified.each &converting
-        added.each &converting
+        modified.each { |f| Mae::Converter.convert(f, working_directory) }
+        added.each { |f| Mae::Converter.convert(f, working_directory) }
       end
 
       listener.start

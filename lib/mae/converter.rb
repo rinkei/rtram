@@ -7,6 +7,15 @@ require "mae"
 
 module Mae
   module Converter
+    def convert(f, working_directory)
+      extname = File.extname(f)
+      if extname == '.slim'
+        slim2html(f, working_directory)
+      elsif extname == '.sass' || extname == '.scss'
+        sass2css(f, working_directory)
+      end
+    end
+
     def slim2html(f, working_directory)
       basename = File.basename(f, ".*")
       html_name = basename + '.html'
@@ -25,7 +34,7 @@ module Mae
       end
     end
 
-    module_function :slim2html, :sass2css
+    module_function :convert, :slim2html, :sass2css
   end
 end
 
