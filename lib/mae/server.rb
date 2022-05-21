@@ -8,6 +8,8 @@ require "mae/project"
 module Mae
   module Server
     def start(working_directory)
+      working_directory ||= "./"
+
       Mae::Project.valid?(working_directory)
 
       listen_to_convert(working_directory)
