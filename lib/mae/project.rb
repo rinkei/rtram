@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "mae"
+require "fileutils"
 
 module Mae
   module Project
@@ -14,8 +15,16 @@ module Mae
         working_directory = './'
       end
 
-      Dir.mkdir("#{working_directory}/slim") unless Dir.exist?("#{working_directory}/slim")
-      Dir.mkdir("#{working_directory}/sass") unless Dir.exist?("#{working_directory}/sass")
+      unless Dir.exist?("#{working_directory}/slim")
+        Dir.mkdir("#{working_directory}/slim")
+        FileUtils.cp("#{Mae.root}/slim/index.slim", "#{working_directory}/slim")
+      end
+
+      unless Dir.exist?("#{working_directory}/sass")
+        Dir.mkdir("#{working_directory}/sass")
+        FileUtils.cp("#{Mae.root}/sass/main.scss", "#{working_directory}/sass")
+      end
+
       Dir.mkdir("#{working_directory}/output") unless Dir.exist?("#{working_directory}/output")
       Dir.mkdir("#{working_directory}/output/css") unless Dir.exist?("#{working_directory}/output/css")
       Dir.mkdir("#{working_directory}/output/image") unless Dir.exist?("#{working_directory}/output/image")

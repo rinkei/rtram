@@ -6,8 +6,6 @@
 /pkg/
 /spec/reports/
 /tmp/
-/slim/
-/sass/
 /output/
 
 # rspec failure tracking
