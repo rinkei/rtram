@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    mae (0.1.0)
+    tram (0.1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -30,7 +30,7 @@ PLATFORMS
 
 DEPENDENCIES
   listen
-  mae!
+  tram!
   sass-embedded
   slim
   webrick

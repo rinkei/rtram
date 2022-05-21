@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require "mae"
+require "tram"
 require "fileutils"
 
-module Mae
+module Tram
   module Project
     class Error < StandardError; end
 
@@ -17,12 +17,12 @@ module Mae
 
       unless Dir.exist?("#{working_directory}/slim")
         Dir.mkdir("#{working_directory}/slim")
-        FileUtils.cp("#{Mae.root}/slim/index.slim", "#{working_directory}/slim")
+        FileUtils.cp("#{Tram.root}/slim/index.slim", "#{working_directory}/slim")
       end
 
       unless Dir.exist?("#{working_directory}/sass")
         Dir.mkdir("#{working_directory}/sass")
-        FileUtils.cp("#{Mae.root}/sass/main.scss", "#{working_directory}/sass")
+        FileUtils.cp("#{Tram.root}/sass/main.scss", "#{working_directory}/sass")
       end
 
       Dir.mkdir("#{working_directory}/output") unless Dir.exist?("#{working_directory}/output")
@@ -41,7 +41,7 @@ module Mae
       if none_directories.length > 0
         raise Error.new <<~EOS
           \nThe project does not have working directories: #{none_directories.join(', ')}.
-          Use `mae new {project_name}` command to create working directories.
+          Use `tram new {project_name}` command to create working directories.
         EOS
       else
         return true

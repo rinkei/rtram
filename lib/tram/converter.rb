@@ -3,9 +3,8 @@
 require "slim"
 require "slim/include"
 require "sass-embedded"
-require "mae"
 
-module Mae
+module Tram
   module Converter
     def convert(f, working_directory)
       extname = File.extname(f)

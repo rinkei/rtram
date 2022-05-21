@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require_relative "mae/version"
+require_relative "tram/version"
 
-module Mae
+module Tram
   class Error < StandardError; end
 
   def root

@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'tram/server'
+require 'tram/project'
+
+case ARGV[0]
+when 's', 'server' then
+  Tram::Server.start ARGV[1]
+when 'new' then
+  Tram::Project.create ARGV[1]
+end

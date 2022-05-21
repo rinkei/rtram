@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-require_relative "lib/mae/version"
+require_relative "lib/tram/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "mae"
-  spec.version = Mae::VERSION
+  spec.name = "tram"
+  spec.version = Tram::VERSION
   spec.authors = ["rinkei"]
   spec.email = ["kei.h.hayashi@gmail.com"]
 
   spec.summary = "static site generator"
-  spec.description = "Mae is a static site generator using Slim & Sass."
-  spec.homepage = "https://github.com/rinkei/mae"
+  spec.description = "Tram is a static site generator using Slim & Sass."
+  spec.homepage = "https://github.com/rinkei/tram"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 2.6.0"
 
