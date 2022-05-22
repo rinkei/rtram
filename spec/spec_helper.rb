@@ -2,6 +2,7 @@
 
 require "tram"
 require "tram/converter"
+require "tram/project"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
