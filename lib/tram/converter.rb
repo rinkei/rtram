@@ -36,4 +36,3 @@ module Tram
     module_function :convert, :slim2html, :sass2css
   end
 end
-

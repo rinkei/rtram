@@ -29,4 +29,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "sass-embedded"
   spec.add_development_dependency "webrick"
   spec.add_development_dependency "listen"
+  spec.add_development_dependency "rspec"
 end
