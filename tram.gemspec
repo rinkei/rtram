@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors = ["rinkei"]
   spec.email = ["kei.h.hayashi@gmail.com"]
 
-  spec.summary = "static site generator"
-  spec.description = "Tram is a static site generator using Slim & Sass."
+  spec.summary = "Tram is a static website generator using Slim & Sass."
+  spec.description = "Tram provides a server to develop static websites while converting Slim and Sass into HTML and CSS."
   spec.homepage = "https://github.com/rinkei/tram"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 2.6.0"
