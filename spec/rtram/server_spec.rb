@@ -15,14 +15,14 @@ RSpec.describe RTram::Converter do
   end
 
   describe '.start' do
-    let(:webrick_double) { double(WEBrick::HTTPServer) }
-
     it 'starts WEBrick::HTTPServer.' do
       expect_any_instance_of(WEBrick::HTTPServer).to receive(:start)
       RTram::Server.start('test_project')
     end
 
     context '(when the webrick is stub on start)' do
+      let(:webrick_double) { double(WEBrick::HTTPServer) }
+
       before do
         allow(webrick_double).to receive(:start)
         allow(WEBrick::HTTPServer).to receive(:new).and_return(webrick_double)
@@ -44,4 +44,21 @@ RSpec.describe RTram::Converter do
       end
     end
   end
+
+=begin
+  describe '.listen_to_convert' do
+    let(:listener) { double(Listen) }
+
+    before do
+      allow(listener).to receive(:start)
+    end
+
+    it "listens to slim & sass directories' changes." do
+      expect(Listen).to receive(:to).with('test_project/slim', 'test_project/sass', force_polling: true)
+        .and_return(listener)
+
+      RTram::Server.listen_to_convert('test_project')
+    end
+  end
+=end
 end
