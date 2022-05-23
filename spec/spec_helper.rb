@@ -3,6 +3,7 @@
 require "rtram"
 require "rtram/converter"
 require "rtram/project"
+require "rtram/server"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
