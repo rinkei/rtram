@@ -2,7 +2,7 @@
 
 require 'fileutils'
 
-RSpec.describe Tram::Project do
+RSpec.describe RTram::Project do
   describe '.create' do
     before do
       Dir.mkdir('test_directory')
@@ -20,7 +20,7 @@ RSpec.describe Tram::Project do
       end
 
       it 'creates test_project directories passed as param.' do
-        expect { Tram::Project.create('test_project') }
+        expect { RTram::Project.create('test_project') }
           .to change { Dir.exist?('test_project') }
           .and change { Dir.exist?('test_project/slim') }
           .and change { File.exist?('test_project/slim/index.slim') }
@@ -34,7 +34,7 @@ RSpec.describe Tram::Project do
 
     context 'when the current directory is the working directory' do
       it 'creates directories in the current directory' do
-        expect { Tram::Project.create(nil) }
+        expect { RTram::Project.create(nil) }
           .to change { Dir.exist?('./slim') }
           .and change { File.exist?('./slim/index.slim') }
           .and change { Dir.exist?('./sass') }

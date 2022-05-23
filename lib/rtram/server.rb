@@ -2,18 +2,18 @@
 
 require "webrick"
 require "listen"
-require "tram/converter"
-require "tram/project"
+require "rtram/converter"
+require "rtram/project"
 
-module Tram
+module RTram
   module Server
     def start(working_directory)
       working_directory ||= "./"
 
-      Tram::Project.valid?(working_directory)
+      RTram::Project.valid?(working_directory)
 
       existing_entries = Dir.glob("#{working_directory}/{slim,sass}/**/*.{slim,sass,scss}")
-      existing_entries.each { |f| Tram::Converter.convert(f, working_directory) }
+      existing_entries.each { |f| RTram::Converter.convert(f, working_directory) }
 
       listen_to_convert(working_directory)
 
@@ -29,8 +29,8 @@ module Tram
       directories = ["#{working_directory}/slim", "#{working_directory}/sass"]
 
       listener = Listen.to(*directories, force_polling: true) do |modified, added, removed|
-        modified.each { |f| Tram::Converter.convert(f, working_directory) }
-        added.each { |f| Tram::Converter.convert(f, working_directory) }
+        modified.each { |f| RTram::Converter.convert(f, working_directory) }
+        added.each { |f| RTram::Converter.convert(f, working_directory) }
       end
 
       listener.start

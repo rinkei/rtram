@@ -1,12 +1,12 @@
-# Tram
+# RTram
 
-Tram is a static website generator using Slim & Sass.
+RTram is a static website generator using Slim & Sass.
 It provides a server to develop static websites while converting Slim and Sass into HTML and CSS.
 
 ## Installation
 
 ```shell
-$ gem install tram
+$ gem install rtram
 ```
 
 ## Usage
@@ -14,14 +14,14 @@ $ gem install tram
 Start a new website project with the following commands.
 
 ```shell
-$ tram new mysite
+$ rtram new mysite
 $ cd mysite
 ```
 
 You can start development by starting the server with the following command.
 
 ```shell
-$ tram s
+$ rtram s
 $ open http://localhost:5000
 ```
 
@@ -40,4 +40,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Tram project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/rinkei/tram/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the RTram project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/rinkei/rtram/blob/master/CODE_OF_CONDUCT.md).

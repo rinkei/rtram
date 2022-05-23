@@ -1,21 +1,21 @@
 # frozen_string_literal: true
 
-RSpec.describe Tram::Converter do
+RSpec.describe RTram::Converter do
   describe '.convert' do
     it 'calls .slim2html when a slim is passed.' do
-      expect(Tram::Converter).to receive(:slim2html)
-      Tram::Converter.convert('test.slim', '.')
+      expect(RTram::Converter).to receive(:slim2html)
+      RTram::Converter.convert('test.slim', '.')
     end
 
     it 'calls .sass2css when a scss is passed.' do
-      expect(Tram::Converter).to receive(:sass2css)
-      Tram::Converter.convert('test.scss', '.')
+      expect(RTram::Converter).to receive(:sass2css)
+      RTram::Converter.convert('test.scss', '.')
     end
 
     it 'calls nothing when a file of other type is passed.' do
-      expect(Tram::Converter).not_to receive(:slim2html)
-      expect(Tram::Converter).not_to receive(:sass2css)
-      Tram::Converter.convert('test.png', '.')
+      expect(RTram::Converter).not_to receive(:slim2html)
+      expect(RTram::Converter).not_to receive(:sass2css)
+      RTram::Converter.convert('test.png', '.')
     end
   end
 
@@ -30,9 +30,9 @@ RSpec.describe Tram::Converter do
         f.write <<~SLIM
         doctype html
         html lang="en"
-          title Tram Converter
+          title RTram Converter
         body
-          h1 Tram Converter
+          h1 RTram Converter
         SLIM
       end
     end
@@ -43,21 +43,21 @@ RSpec.describe Tram::Converter do
     end
 
     it 'creates html' do
-      expect { Tram::Converter.slim2html(@slim, working_directory) }.to change { File.exist?(@html) }
+      expect { RTram::Converter.slim2html(@slim, working_directory) }.to change { File.exist?(@html) }
     end
 
     it 'converts slim to html' do
-      Tram::Converter.slim2html(@slim, working_directory)
-      expect(File.open(@html, 'r') { |f| f.read }).to match /<h1>\n*\s*Tram Converter\n*\s*<\/h1>/
+      RTram::Converter.slim2html(@slim, working_directory)
+      expect(File.open(@html, 'r') { |f| f.read }).to match /<h1>\n*\s*RTram Converter\n*\s*<\/h1>/
     end
 
     context 'when params are wrong' do
       it 'raises an error by passing the wrong slim.' do
-        expect { Tram::Converter.slim2html('wrong_slim', working_directory) }.to raise_error Errno::ENOENT
+        expect { RTram::Converter.slim2html('wrong_slim', working_directory) }.to raise_error Errno::ENOENT
       end
 
       it 'raises an error by passing the wrong working directory.' do
-        expect { Tram::Converter.slim2html(@slim, 'wrong_directory') }.to raise_error Errno::ENOENT
+        expect { RTram::Converter.slim2html(@slim, 'wrong_directory') }.to raise_error Errno::ENOENT
       end
     end
   end
@@ -87,21 +87,21 @@ RSpec.describe Tram::Converter do
 
 
     it 'creates css' do
-      expect { Tram::Converter.sass2css(@scss, working_directory) }.to change { File.exist?(@css) }
+      expect { RTram::Converter.sass2css(@scss, working_directory) }.to change { File.exist?(@css) }
     end
 
     it 'converts scss to css' do
-      Tram::Converter.sass2css(@scss, working_directory)
+      RTram::Converter.sass2css(@scss, working_directory)
       expect(File.open(@css, 'r') { |f| f.read }).to match /color: #123456;/
     end
 
     context 'when params are wrong' do
       it 'raises an error by passing the wrong slim.' do
-        expect { Tram::Converter.sass2css('wrong_scss', working_directory) }.to raise_error Sass::CompileError
+        expect { RTram::Converter.sass2css('wrong_scss', working_directory) }.to raise_error Sass::CompileError
       end
 
       it 'raises an error by passing the wrong working directory.' do
-        expect { Tram::Converter.sass2css(@scss, 'wrong_directory') }.to raise_error Errno::ENOENT
+        expect { RTram::Converter.sass2css(@scss, 'wrong_directory') }.to raise_error Errno::ENOENT
       end
     end
   end

@@ -4,7 +4,7 @@ require "slim"
 require "slim/include"
 require "sass-embedded"
 
-module Tram
+module RTram
   module Converter
     def convert(f, working_directory)
       extname = File.extname(f)

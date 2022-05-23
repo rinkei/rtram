@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tram (0.2.0)
+    rtram (0.2.0)
 
 GEM
   remote: https://rubygems.org/
@@ -47,7 +47,7 @@ DEPENDENCIES
   rspec
   sass-embedded
   slim
-  tram!
+  rtram!
   webrick
 
 BUNDLED WITH

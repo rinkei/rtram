@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require "tram"
-require "tram/converter"
-require "tram/project"
+require "rtram"
+require "rtram/converter"
+require "rtram/project"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

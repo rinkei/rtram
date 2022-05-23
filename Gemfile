@@ -2,5 +2,5 @@
 
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in tram.gemspec
+# Specify your gem's dependencies in rtram.gemspec
 gemspec

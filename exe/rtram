@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'rtram/server'
+require 'rtram/project'
+
+case ARGV[0]
+when 's', 'server' then
+  RTram::Server.start ARGV[1]
+when 'new' then
+  RTram::Project.create ARGV[1]
+end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-RSpec.describe Tram do
+RSpec.describe RTram do
   it "has a version number" do
-    expect(Tram::VERSION).not_to be nil
+    expect(RTram::VERSION).not_to be nil
   end
 end

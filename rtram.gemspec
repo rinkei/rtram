@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-require_relative "lib/tram/version"
+require_relative "lib/rtram/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "tram"
-  spec.version = Tram::VERSION
+  spec.name = "rtram"
+  spec.version = RTram::VERSION
   spec.authors = ["rinkei"]
   spec.email = ["kei.h.hayashi@gmail.com"]
 
-  spec.summary = "Tram is a static website generator using Slim & Sass."
-  spec.description = "Tram provides a server to develop static websites while converting Slim and Sass into HTML and CSS."
-  spec.homepage = "https://github.com/rinkei/tram"
+  spec.summary = "RTram is a static website generator using Slim & Sass."
+  spec.description = "RTram provides a server to develop static websites while converting Slim and Sass into HTML and CSS."
+  spec.homepage = "https://github.com/rinkei/rtram"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 2.6.0"
 
