@@ -3,17 +3,17 @@
 require 'fileutils'
 
 RSpec.describe RTram::Project do
+  before do
+    Dir.mkdir('test_directory')
+    Dir.chdir('test_directory')
+  end
+
+  after do
+    Dir.chdir('..')
+    FileUtils.rm_rf('test_directory')
+  end
+
   describe '.create' do
-    before do
-      Dir.mkdir('test_directory')
-      Dir.chdir('test_directory')
-    end
-
-    after do
-      Dir.chdir('..')
-      FileUtils.rm_rf('test_directory')
-    end
-
     context 'when project_name is passed as the working directory' do
       after do
         FileUtils.rm_f('test_project')
@@ -43,6 +43,19 @@ RSpec.describe RTram::Project do
           .and change { Dir.exist?('./output/css') }
           .and change { Dir.exist?('./output/image') }
       end
+    end
+  end
+
+  describe '.valid?' do
+    it 'returns true when necessary directories exist.' do
+      RTram::Project.create('test_project')
+      expect(RTram::Project.valid?('test_project')).to eq true
+    end
+
+    it 'raise error when a necessary directory does not exist.' do
+      RTram::Project.create('test_project')
+      FileUtils.rm_rf('test_project/output/css')
+      expect { RTram::Project.valid?('test_project') }.to raise_error RTram::Project::Error
     end
   end
 end
