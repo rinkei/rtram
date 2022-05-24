@@ -8,6 +8,7 @@ GEM
   specs:
     diff-lcs (1.5.0)
     ffi (1.15.5)
+    google-protobuf (3.20.1)
     google-protobuf (3.20.1-x86_64-darwin)
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
@@ -40,6 +41,7 @@ GEM
     webrick (1.7.0)
 
 PLATFORMS
+  ruby
   x86_64-darwin-20
 
 DEPENDENCIES
