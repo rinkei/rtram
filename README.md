@@ -25,14 +25,9 @@ $ rtram s
 $ open http://localhost:5000
 ```
 
-Slim and Sass to be developed, and the output HTML and CSS are located in the following directories.
+Then `.slim` files in `slim` directory and `.sass` or `.scss` files in `sass` directory are converted during the server is working.
 
-```
-$ % ls -l
-drwxr-xr-x  5 rinkei  rinkei  160  5 22 08:56 output
-drwxr-xr-x  3 rinkei  rinkei   96  5 22 08:56 sass
-drwxr-xr-x  3 rinkei  rinkei   96  5 22 08:57 slim
-```
+The output HTML and CSS files are generated in `output` directory.
 
 ## License
 
